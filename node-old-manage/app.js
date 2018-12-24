@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const db = require("./models/db.js");
 var router = require('./routes/index');
+require('babel-polyfill');
+require('babel-core/register');
 var usersRouter = require('./routes/users');
 
 var app = express();

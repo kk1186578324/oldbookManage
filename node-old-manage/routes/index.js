@@ -1,4 +1,3 @@
-'use strict';
 
 import classify from './classify'
 

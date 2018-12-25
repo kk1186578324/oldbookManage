@@ -75,9 +75,9 @@ var options = {
   target: proxypath,
   changeOrigin: true,
 }
-if (context.length) {
-  app.use(proxyMiddleware(context, options))
-}
+// if (context.length) {
+//   app.use(proxyMiddleware(context, options))
+// }
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port

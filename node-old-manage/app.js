@@ -5,12 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const db = require("./models/db.js");
 var router = require('./routes/index');
+import chalk from 'chalk';
 require('babel-polyfill');
 require('babel-core/register');
-var usersRouter = require('./routes/users');
+// var usersRouter = require('./routes/users');
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -36,5 +36,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+app.listen(3000, () => {
+    console.log(
+        chalk.green(`成功监听端口:3000`)
+    )
+})
 module.exports = app;

@@ -40,19 +40,15 @@
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item label="是否推荐">
-          <el-radio-group v-model="form.resource">
+          <el-radio-group v-model="form.recommend">
             <el-radio label="是"></el-radio>
             <el-radio label="否"></el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
-          <el-button>取消</el-button>
-        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+    <el-button type="primary" @click="onSubmit()">确 定</el-button>
      </span>
     </el-dialog>
 
@@ -60,6 +56,7 @@
 </template>
 
 <script>
+  import {addClassify} from "@/api/getData"
   export default {
     data() {
       return {
@@ -81,7 +78,11 @@
           date: '2016-05-03',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        }],
+        form:{
+          name:"",
+          recommend:"是"
+        }
       }
     },
     methods:{
@@ -90,7 +91,16 @@
           this.dialogVisible =true;
         }
       },
-      onSubmit(){
+      async onSubmit(){
+        if(this.dialogVisible){
+          this.dialogVisible =false;
+        }
+
+        const result = await addClassify(this.form);
+        console.log(result)
+
+
+
 
       }
 

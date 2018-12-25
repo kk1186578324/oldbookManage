@@ -1,10 +1,7 @@
 
-import classify from './classify'
+var classify = require('./classify');
 
 
-export default app => {
-	// app.get('/', (req, res, next) => {
-	// 	res.redirect('/');
-	// });
+module.exports = app => {
 	app.use('/classify', classify);
 }

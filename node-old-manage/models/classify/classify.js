@@ -3,8 +3,5 @@ var classifySchema = new mongoose.Schema({
   "name":String,
   "status":String
 })
-const Classify= mongoose.model('Classify',classifySchema);
 
-
-
-export default Classify
+module.exports  =  mongoose.model('Classify',classifySchema);;

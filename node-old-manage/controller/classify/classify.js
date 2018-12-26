@@ -5,32 +5,46 @@ class Classify{
     constructor(){
 
 	}
-    async add(req,res,next){
-        const form  = new formidable.IncomingForm()
-        form.parse(req,async (err,fields,files)=>{
-              console.log(fields)
-            if(err){
-                res.send({
-                    status:0,
-                    message:'表单信息错误'
-                })
-                return
-            }
-
-            const classifyData = {name,recommend} = fields;
-
-            await classifyModel.create(classifyData);
-
-            res.send({
-                status: 1,
-                success: '添加成功',
-            })
-
-
+     async add(req,res,next){
+         const form  = new formidable.IncomingForm()
+		 var classifyData = {
+		    name:req.body.name,
+		    recommend:req.body.recommend
+		  }
+          
+      var findresult = await classifyModel.findOne({name:classifyData.name});
+        if(findresult){
+	        res.send({
+	            success:false,
+	            msg:'该分类已存在'
+	        })
+        }
+      var addresult =   await classifyModel.create(classifyData);
+        res.send({
+            success:true,
+            msg:'添加成功'
         })
-
     }
-
+   async list(req,res,next){
+   	let page = req.body.page;
+    let pageSize = req.body.pageSize;
+    let skip = (page-1)*pageSize;
+    var findresult = await classifyModel.find({}).skip(skip).limit(pageSize)
+    var count = await classifyModel.count();
+        if(findresult){
+	        res.send({
+	            success:true,
+	            content:findresult,
+	            count:count
+	        })
+        }else{
+    	  res.send({
+            success:false,
+            content:'查询失败'
+           })
+        }
+  
+    }
     update(){
 
     }

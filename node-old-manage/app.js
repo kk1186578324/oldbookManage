@@ -3,11 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// var connect = require('connect');
 const db = require("./models/db.js");
 var router = require('./routes/index');
+var history = require('connect-history-api-fallback');
 import chalk from 'chalk';
-require('babel-polyfill');
-require('babel-core/register');
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -36,6 +36,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+app.use(history())
 app.listen(3000, () => {
     console.log(
         chalk.green(`成功监听端口:3000`)

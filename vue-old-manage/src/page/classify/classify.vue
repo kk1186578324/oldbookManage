@@ -27,6 +27,15 @@
       </template>
     </el-table-column>
   </el-table>
+  <div class="block">
+  <el-pagination
+    @size-change="handleSizeChange"
+    @current-change="handleCurrentChange"
+    :current-page.sync="currentPage1"
+    layout="prev, pager, next"
+    :total="50">
+  </el-pagination>
+  </div>
 
     <!--弹框-->
 
@@ -56,36 +65,29 @@
 </template>
 
 <script>
-  import {addClassify} from "@/api/getData"
+  import {addClassify,listClassify} from "@/api/getData"
   export default {
     data() {
       return {
 
         dialogVisible:false,
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }],
+        tableData: [],
         form:{
           name:"",
           recommend:"是"
-        }
+        },
+        currentPage1:1,
+        pageSize:10
       }
     },
+    create(){
+
+    },
     methods:{
+      async initData(){
+      const result = await listClassify();
+        console.log(result);
+      },
       handleAdd(){
         if(!this.dialogVisible){
           this.dialogVisible =true;
@@ -98,10 +100,14 @@
 
         const result = await addClassify(this.form);
         console.log(result)
-
-
-
-
+      },
+       handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      async handleCurrentChange(val) {
+          this.currentPage1 = val;
+        const result = await listClassify({page:val,pageSize:this.pageSize});
+        console.log(`当前页: ${val}`);
       }
 
     }

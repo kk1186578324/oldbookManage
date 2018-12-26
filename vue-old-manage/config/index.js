@@ -13,6 +13,15 @@ module.exports = {
     proxyTable: {
       '/classify/*':{
         target:'http://localhost:3000'
+      },
+      '/banner/*':{
+        target:'http://localhost:3000'
+      },
+      '/v1/*':{
+        target:'http://localhost:3000'
+      },
+      '/img/*':{
+        target:'http://localhost:3000'
       }
     },
 

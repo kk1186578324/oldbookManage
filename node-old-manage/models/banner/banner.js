@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var bannerSchema = new mongoose.Schema({
-  "bannerImg":String,
+    "name":String,
+    "url":String,
+    "id":Number
 })
 module.exports = mongoose.model('Banner',bannerSchema);

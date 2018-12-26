@@ -37,6 +37,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 app.use(history())
+
+app.use(express.static("./public"))
 app.listen(3000, () => {
     console.log(
         chalk.green(`成功监听端口:3000`)

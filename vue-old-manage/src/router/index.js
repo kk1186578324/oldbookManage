@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from "@/page/index/index"
 import classify from "@/page/classify/classify"
+import banner from "@/page/banner/banner"
 // import login from "@/page/login"
 // import manage from "@/page/manage"
 // import listArticle from "@/page/articleList"
@@ -28,11 +29,11 @@ export default new Router({
           component: classify,
           meta: ['分类管理']
         },
-          {
-            path: '/banner',
-            component: classify,
-            meta: ['banner图管理']
-          }]
+        {
+          path: '/banner',
+          component: banner,
+          meta: ['banner图管理']
+        }]
     }
     // {
     //   path: '/classify',
@@ -86,5 +87,5 @@ export default new Router({
     //   component: imgList
     // }
   ],
-  mode:"history"
+  // mode:"history"
 })

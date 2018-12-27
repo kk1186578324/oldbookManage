@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import index from "@/page/index/index"
 import classify from "@/page/classify/classify"
 import banner from "@/page/banner/banner"
+import books from "@/page/books/books"
+import periodical from "@/page/periodical/periodical"
 // import login from "@/page/login"
 // import manage from "@/page/manage"
 // import listArticle from "@/page/articleList"
@@ -33,7 +35,17 @@ export default new Router({
           path: '/banner',
           component: banner,
           meta: ['banner图管理']
-        }]
+        },
+          {
+            path: '/books',
+            component: books,
+            meta: ['书籍管理']
+          },
+          {
+            path: '/periodical',
+            component: periodical,
+            meta: ['期刊管理']
+          }]
     }
     // {
     //   path: '/classify',

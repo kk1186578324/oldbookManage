@@ -22,6 +22,12 @@ module.exports = {
       },
       '/img/*':{
         target:'http://localhost:3000'
+      },
+      '/books/*':{
+        target:'http://localhost:3000'
+      },
+      '/periodical/*':{
+        target:'http://localhost:3000'
       }
     },
 

@@ -16,9 +16,8 @@
             <el-menu-item-group>
               <el-menu-item index="classify">分类管理</el-menu-item>
               <el-menu-item index="banner">banner图管理</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
+              <el-menu-item index="books">书籍管理</el-menu-item>
+              <el-menu-item index="periodical">期刊管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>

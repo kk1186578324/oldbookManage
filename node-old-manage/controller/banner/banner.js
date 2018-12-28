@@ -7,8 +7,9 @@ class Banner extends  BaseComponent{
         super()
         this.add = this.add.bind(this);
     }
-    async add(req,res,next){
+    async add(req,res,next,paramData){
         const banner_id = await this.getId('banner_id');
+        console.log(paramData)
         var bannerData = {
             name:req.body.name,
             url:req.body.url,

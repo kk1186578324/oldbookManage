@@ -39,7 +39,7 @@ class Periodical extends  BaseComponent{
         let page = req.body.page||1;
         let pageSize = req.body.pageSize||10;
         let skip = (page-1)*pageSize;
-        var findresult = await periodicalModel.find({}).skip(skip).limit(pageSize)
+        var findresult = await periodicalModel.find({}).sort({pubdate:1}).skip(skip).limit(pageSize)
         var count = await periodicalModel.count();
         if(findresult){
             res.send({

@@ -28,6 +28,9 @@ module.exports = {
       },
       '/periodical/*':{
         target:'http://localhost:3000'
+      },
+      '/like/*':{
+        target:'http://localhost:3000'
       }
     },
 

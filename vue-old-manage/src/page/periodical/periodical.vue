@@ -11,19 +11,24 @@
         width="150">
       </el-table-column>
       <el-table-column
+        prop="content"
+        label="期刊内容"
+        width="400">
+      </el-table-column>
+      <el-table-column
         prop="fav_nums"
         label="点赞次数"
-        width="100">
+        width="60">
       </el-table-column>
       <el-table-column
         prop="index"
         label="期号"
-        width="180">
+        width="60">
       </el-table-column>
       <el-table-column
         prop="like_status"
         label="是否点赞"
-        width="100">
+        width="60">
       </el-table-column>
       <el-table-column
         prop="pubdate"
@@ -78,6 +83,9 @@
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="期刊名称" prop="title">
           <el-input v-model="form.title"></el-input>
+        </el-form-item>
+        <el-form-item label="期刊内容" prop="content">
+          <el-input v-model="form.content"></el-input>
         </el-form-item>
         <el-form-item label="点赞次数" prop="fav_nums">
           <el-input v-model="form.fav_nums"></el-input>
@@ -194,7 +202,7 @@
           this.dialogVisible = true;
         }
         this.form = Object.assign({}, value);
-        this.imageUrl =baseImgPath + this.form.img;
+        this.imageUrl =baseImgPath + this.form.image;
       },
       //添加保存
       async onSubmit() {
@@ -244,7 +252,7 @@
       uploadImg(response, file, fileList) {
         if (response.success) {
           this.imageUrl = baseImgPath + response.image_path;
-          this.form.img = response.image_path;
+          this.form.image = response.image_path;
         }
       },
       /**

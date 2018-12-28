@@ -1,22 +1,25 @@
 
 var formidable = require("formidable")
 var BaseComponent = require ('../../prototype/baseComponent')
-var bannerModel = require("../../models/banner/banner");
-class Banner extends  BaseComponent{
+var booksModel = require("../../models/books/books");
+class Books extends  BaseComponent{
     constructor(){
         super()
         this.add = this.add.bind(this);
     }
-    async add(req,res,next,paramData){
-        const banner_id = await this.getId('banner_id');
-        console.log(paramData)
-        var bannerData = {
+    async add(req,res,next){
+        const books_id = await this.getId('books_id');
+        var booksData = {
             name:req.body.name,
-            url:req.body.url,
-            id:banner_id
+            author:req.body.author,
+            price:req.body.price,
+            score:req.body.score,
+            img:req.body.img,
+            classify:req.body.classify,
+            id:books_id
         }
 
-        var findresult = await bannerModel.findOne({name:bannerData.name});
+        var findresult = await booksModel.findOne({name:booksData.name});
         if(findresult){
             res.send({
                 success:false,
@@ -24,18 +27,18 @@ class Banner extends  BaseComponent{
             })
             return;
         }
-        var addresult =   await bannerModel.create(bannerData);
-            res.send({
-                success:true,
-                msg:'添加成功'
-            })
+        var addresult =   await booksModel.create(booksData);
+        res.send({
+            success:true,
+            msg:'添加成功'
+        })
     }
     async list(req,res,next){
-        let page = req.body.page;
-        let pageSize = req.body.pageSize;
+        let page = req.body.page||1;
+        let pageSize = req.body.pageSize||10;
         let skip = (page-1)*pageSize;
-        var findresult = await bannerModel.find({}).skip(skip).limit(pageSize)
-        var count = await bannerModel.count();
+        var findresult = await booksModel.find({}).skip(skip).limit(pageSize)
+        var count = await booksModel.count();
         if(findresult){
             res.send({
                 success:true,
@@ -51,11 +54,15 @@ class Banner extends  BaseComponent{
 
     }
     async update(req,res,next){
-        var bannerData = {
+        var booksData = {
             name:req.body.name,
-            url:req.body.url
+            author:req.body.author,
+            price:req.body.price,
+            score:req.body.score,
+            img:req.body.img,
+            classify:req.body.classify
         }
-        var result = await bannerModel.update({_id:req.body._id},bannerData);
+        var result = await booksModel.update({_id:req.body._id},booksData);
         if(result){
             res.send({
                 success:true,
@@ -71,8 +78,8 @@ class Banner extends  BaseComponent{
 
     }
     async delete(req,res,next){
-        const banner_id = req.params.banner_id;
-        var findresult = await bannerModel.remove({_id:banner_id});
+        const _id = req.params.books_id;
+        var findresult = await booksModel.remove({_id});
         console.log(findresult)
         if(findresult){
             res.send({
@@ -94,4 +101,4 @@ class Banner extends  BaseComponent{
 
 
 
-module.exports =  new Banner();
+module.exports =  new Books();

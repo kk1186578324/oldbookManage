@@ -8,7 +8,7 @@ var Ids = require('../models/ids')
  class BaseComponent{
 
     constructor(){
-        this.idList = ['classify_id','img_id','banner_id']
+        this.idList = ['classify_id','img_id','banner_id','books_id','periodical_id']
         this.uploadImg = this.uploadImg.bind(this);
         this.getPath = this.getPath.bind(this);
         this.getId = this.getId.bind(this);

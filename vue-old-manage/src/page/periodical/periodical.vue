@@ -18,17 +18,17 @@
       <el-table-column
         prop="fav_nums"
         label="点赞次数"
-        width="60">
+        width="50">
       </el-table-column>
       <el-table-column
         prop="index"
         label="期号"
-        width="60">
+        width="50">
       </el-table-column>
       <el-table-column
         prop="like_status"
         label="是否点赞"
-        width="60">
+        width="50">
       </el-table-column>
       <el-table-column
         prop="pubdate"
@@ -38,12 +38,17 @@
       <el-table-column
         prop="type"
         label="期刊类型"
-        width="100">
+        width="50">
       </el-table-column>
       <el-table-column
         prop="id"
         label="ID"
-        width="100">
+        width="50">
+      </el-table-column>
+      <el-table-column
+        prop="url"
+        label="音乐"
+        width="180">
       </el-table-column>
       <el-table-column
         prop="image"
@@ -110,6 +115,9 @@
         <el-form-item label="期刊类型" prop="type">
           <el-input v-model="form.type"></el-input>
         </el-form-item>
+        <el-form-item label="音乐" prop="url">
+          <el-input v-model="form.url"></el-input>
+        </el-form-item>
         <el-form-item label="图书封面" prop="image">
           <el-upload
             class="avatar-uploader"
@@ -151,6 +159,7 @@
           pubdate:"",
           title:"",
           type:"",
+          url:""
         },
         classifys:[],
         currentPage1: 1,

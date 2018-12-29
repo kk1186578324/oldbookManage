@@ -10,16 +10,18 @@ class Books extends  BaseComponent{
     async add(req,res,next){
         const books_id = await this.getId('books_id');
         var booksData = {
-            name:req.body.name,
+            title:req.body.title,
             author:req.body.author,
+            fav_nums:req.body.fav_nums,
+            like_status:req.body.like_status,
             price:req.body.price,
             score:req.body.score,
-            img:req.body.img,
+            image:req.body.image,
             classify:req.body.classify,
             id:books_id
         }
 
-        var findresult = await booksModel.findOne({name:booksData.name});
+        var findresult = await booksModel.findOne({title:booksData.title});
         if(findresult){
             res.send({
                 success:false,
@@ -55,11 +57,13 @@ class Books extends  BaseComponent{
     }
     async update(req,res,next){
         var booksData = {
-            name:req.body.name,
+            title:req.body.title,
             author:req.body.author,
+            fav_nums:req.body.fav_nums,
+            like_status:req.body.like_status,
             price:req.body.price,
             score:req.body.score,
-            img:req.body.img,
+            image:req.body.image,
             classify:req.body.classify
         }
         var result = await booksModel.update({_id:req.body._id},booksData);

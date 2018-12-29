@@ -18,6 +18,7 @@ class Periodical extends  BaseComponent{
             pubdate:req.body.pubdate,
             title:req.body.title,
             type:req.body.type,
+            url:req.body.url,
             id:periodical_id
         }
 
@@ -64,7 +65,8 @@ class Periodical extends  BaseComponent{
             like_status:req.body.like_status,
             pubdate:req.body.pubdate,
             title:req.body.title,
-            type:req.body.type,
+            url:req.body.url,
+            type:req.body.type
         }
         var result = await periodicalModel.update({_id:req.body._id},booksData);
         if(result){
@@ -98,8 +100,6 @@ class Periodical extends  BaseComponent{
         }
 
     }
-
-
 
 }
 

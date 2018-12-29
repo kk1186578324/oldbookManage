@@ -8,6 +8,7 @@ var periodicalSchema = new mongoose.Schema({
     "pubdate":String,
     "title":String,
     "type":Number,
+    "url":String,
     "id":Number
 })
 module.exports = mongoose.model('periodical',periodicalSchema);

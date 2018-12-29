@@ -6,9 +6,19 @@
       stripe
       style="width: 100%">
       <el-table-column
-        prop="name"
+        prop="title"
         label="书籍名称"
         width="180">
+      </el-table-column>
+      <el-table-column
+        prop="fav_nums"
+        label="点赞数量"
+        width="50">
+      </el-table-column>
+      <el-table-column
+        prop="like_status"
+        label="是否点赞"
+        width="50">
       </el-table-column>
       <el-table-column
         prop="classify"
@@ -23,15 +33,15 @@
       <el-table-column
         prop="score"
         label="评分"
-        width="180">
+        width="80">
       </el-table-column>
       <el-table-column
         prop="price"
         label="价格"
-        width="180">
+        width="80">
       </el-table-column>
       <el-table-column
-        prop="img"
+        prop="image"
         label="图片"
         width="180">
       </el-table-column>
@@ -65,9 +75,15 @@
       :visible.sync="dialogVisible"
       width="30%"
     >
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="书籍名称" prop="name">
-          <el-input v-model="form.name"></el-input>
+      <el-form ref="form" :model="form"  label-width="80px">
+        <el-form-item label="书籍名称" prop="title">
+          <el-input v-model="form.title"></el-input>
+        </el-form-item>
+        <el-form-item label="点赞数量" prop="fav_nums">
+          <el-input v-model="form.fav_nums"></el-input>
+        </el-form-item>
+        <el-form-item label="是否点赞" prop="like_status">
+          <el-input v-model="form.like_status"></el-input>
         </el-form-item>
         <el-form-item label="书籍分类" prop="classify">
 
@@ -95,7 +111,7 @@
         <el-form-item label="价格" prop="price">
           <el-input v-model.number="form.price"></el-input>
         </el-form-item>
-        <el-form-item label="图书封面" prop="img">
+        <el-form-item label="图书封面" prop="image">
           <el-upload
             class="avatar-uploader"
             action="/v1/addimg/books"
@@ -128,12 +144,14 @@
         dialogVisible: false,
         tableData: [],
         form: {
-          name: "",
+          title: "",
+          fav_nums:null,
           classify:"",
           author: "",
+          like_status:null,
           score: null,
           price: null,
-          img: ""
+          image: ""
         },
         rules: {
           name: [
@@ -203,7 +221,7 @@
           this.dialogVisible = true;
         }
         this.form = Object.assign({}, value);
-        this.imageUrl =baseImgPath + this.form.img;
+        this.imageUrl =baseImgPath + this.form.image;
       },
       //添加保存
       async onSubmit() {
@@ -253,7 +271,7 @@
       uploadImg(response, file, fileList) {
         if (response.success) {
           this.imageUrl = baseImgPath + response.image_path;
-          this.form.img = response.image_path;
+          this.form.image = response.image_path;
         }
       },
       /**

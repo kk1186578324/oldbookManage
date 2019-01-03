@@ -29,6 +29,29 @@ class Like extends  BaseComponent{
             msg:'操作成功'
         })
     }
+    async list(req,res,next){
+        var paramData = {
+            id:req.body.art_id,
+            type:req.body.type
+        }
+        var findresult = await periodicalModel.findOne({id:paramData.id,type:paramData.type});
+        if(findresult){
+            res.send({
+                success:true,
+                content:{
+                    "fav_nums": findresult.fav_nums,
+                    "id": findresult.id,
+                    "like_status": findresult.like_status
+                }
+            })
+        }else {
+            res.send({
+                success:false,
+                msg:"获取失败！"
+            })
+        }
+
+    }
 
 }
 

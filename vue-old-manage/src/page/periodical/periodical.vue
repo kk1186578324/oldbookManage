@@ -227,7 +227,7 @@
               result = await addPeriodical(this.form);
             }
             if (result.success) {
-              this.$refs["form"].resetFields()
+              this.$refs["form"].resetFields();
               this.imageUrl="";
               this.initData(this.currentPage1);
             }
@@ -272,7 +272,7 @@
       onCancel(){
         if (this.dialogVisible) {
           this.dialogVisible = false;
-          this.$refs["form"].resetFields()
+          this.$refs["form"].resetFields();
           this.imageUrl = "";
         }
 

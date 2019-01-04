@@ -8,6 +8,7 @@ var BooksSchema = new mongoose.Schema({
     "score":Number,
     "classify":String,
     "image":String,
-    "id":Number
+    "id":Number,
+    "comment":[]
 })
 module.exports = mongoose.model('Books',BooksSchema);

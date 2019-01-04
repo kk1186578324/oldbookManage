@@ -274,6 +274,7 @@
           this.dialogVisible = false;
           this.$refs["form"].resetFields();
           this.imageUrl = "";
+          this.form._id = null;
         }
 
       },

@@ -98,6 +98,28 @@ class Books extends  BaseComponent{
         }
 
     }
+    /**
+     *获取书籍详情
+     * @param
+     * @param
+     */
+    async detail(req,res,next){
+        const _id = req.params.books_id;
+        var findresult = await booksModel.findOne({_id});
+
+        if(findresult){
+            res.send({
+                success:true,
+                content:findresult,
+            })
+        }else {
+            res.send({
+                success:false,
+                msg:'获取失败'
+            })
+        }
+
+    }
 
 
 

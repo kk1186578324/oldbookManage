@@ -151,7 +151,8 @@
           like_status:null,
           score: null,
           price: null,
-          image: ""
+          image: "",
+          _id:null
         },
         rules: {
           name: [
@@ -231,7 +232,9 @@
               this.dialogVisible = false;
             }
             var result;
+            console.log(this.form._id)
             if (this.form._id) {
+
               result = await updateBooks(this.form);
             } else {
               result = await addBooks(this.form);
@@ -282,7 +285,8 @@
       onCancel(){
         if (this.dialogVisible) {
           this.dialogVisible = false;
-          this.$refs["form"].resetFields()
+          this.$refs["form"].resetFields();
+          this.form._id = null;
           this.imageUrl = "";
         }
 

@@ -41,10 +41,7 @@ module.exports = {
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-   //  context: [ //代理路径
-   //  '/classify',
-   // ],
-
+    
     /**
      * Source Maps
      */

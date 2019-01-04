@@ -14,6 +14,7 @@ var proxyMiddleware = require('http-proxy-middleware')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 var app = express()
+app.use(require('connect-history-api-fallback')())
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -68,13 +69,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
-var context = config.dev.context
+// var context = config.dev.context
 
-var proxypath = 'http://localhost:3000'
-var options = {
-  target: proxypath,
-  changeOrigin: true,
-}
+// var proxypath = 'http://localhost:3000'
+// var options = {
+//   target: proxypath,
+//   changeOrigin: true,
+// }
 // if (context.length) {
 //   app.use(proxyMiddleware(context, options))
 // }

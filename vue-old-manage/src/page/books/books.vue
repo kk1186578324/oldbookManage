@@ -31,14 +31,27 @@
         width="180">
       </el-table-column>
       <el-table-column
+        prop="validity"
+        label="简介"
+        width="180">
+      </el-table-column>
+      <el-table-column
         prop="score"
         label="评分"
-        width="80">
+        width="50">
       </el-table-column>
       <el-table-column
         prop="price"
         label="价格"
         width="80">
+        <template scope="scope">
+            {{scope.row.price|MoneyFormat}}
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="pubdate"
+        label="出版时间"
+        width="100">
       </el-table-column>
       <el-table-column
         prop="image"
@@ -97,10 +110,23 @@
               size="mini"
               ></el-option>
           </el-select>
-          <!--<el-input v-model="form.classify"></el-input>-->
+        </el-form-item>
+        <el-form-item label="发布日期" prop="pubdate">
+
+          <div class="block">
+            <el-date-picker
+              v-model="form.pubdate"
+              type="date"
+              placeholder="选择日期"
+              value-format="yyyy-MM-dd">
+            </el-date-picker>
+          </div>
         </el-form-item>
         <el-form-item label="作者" prop="author">
           <el-input v-model="form.author"></el-input>
+        </el-form-item>
+        <el-form-item label="简介" prop="validity">
+          <el-input v-model="form.validity"></el-input>
         </el-form-item>
         <el-form-item label="评分" prop="score">
           <div class="block">
@@ -135,6 +161,7 @@
 
 <script>
   import {addBooks, listBooks, deleteBooks, updateBooks, listClassify} from "@/api/getData"
+  // import MoneyFormat from 'vue-money-format'
   import {baseUrl, baseImgPath} from '@/config/env'
 
   export default {
@@ -152,6 +179,8 @@
           score: null,
           price: null,
           image: "",
+          validity:null,
+          pubdate:null,
           _id:null
         },
         rules: {
@@ -176,11 +205,37 @@
         currentPage1: 1,
         pageSize: 10,
         pageTotal: 0,
-        imageUrl: ""
+        imageUrl: "",
+        testData:100
+      }
+    },
+    filters: {
+      MoneyFormat(money) {
+        if (money && money != null) {
+          money = String(money);
+          var left = money.split('.')[0], right = money.split('.')[1];
+          right = right ? (right.length >= 2 ? '.' + right.substr(0, 2) : '.' + right + '0') : '.00';
+          var temp = left.split('').reverse().join('').match(/(\d{1,3})/g);
+          return '￥'+ (Number(money) < 0 ? '-' : '') + temp.join(',').split('').reverse().join('') + right;
+        } else if (money === 0) { // 注意===在这里的使用，如果传入的money为0,if中会将其判定为boolean类型，故而要另外做===判断
+          return '0.00';
+        } else {
+          return '';
+        }
       }
     },
     created() {
       this.initData();
+    },
+    computed:{
+         newPrice(){
+           return this.testData = "Y"+this.testData
+         }
+    },
+    watch:{
+      testData(newVAl,oldVal){
+        console.log(newVAl,oldVal)
+      }
     },
     methods: {
       async initData(page = 1) {
@@ -207,6 +262,7 @@
        * 添加信息
        */
       handleAdd() {
+        this.testData = this.testData+1
         if (!this.dialogVisible) {
           this.dialogVisible = true;
           this.initClassify();
@@ -240,8 +296,9 @@
               result = await addBooks(this.form);
             }
             if (result.success) {
-              this.$refs["form"].resetFields()
+              this.$refs["form"].resetFields();
               this.imageUrl="";
+              this.form._id=null;
               this.initData(this.currentPage1);
             }
             this.$message(result.msg);

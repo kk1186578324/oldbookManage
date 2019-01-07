@@ -18,9 +18,10 @@ class Books extends  BaseComponent{
             score:req.body.score,
             image:req.body.image,
             classify:req.body.classify,
+            pubdate:req.body.pubdate,
+            validity:req.body.validity,
             id:books_id
         }
-
         var findresult = await booksModel.findOne({title:booksData.title});
         if(findresult){
             res.send({
@@ -64,6 +65,8 @@ class Books extends  BaseComponent{
             price:req.body.price,
             score:req.body.score,
             image:req.body.image,
+            validity:req.body.validity,
+            pubdate:req.body.pubdate,
             classify:req.body.classify
         }
         var result = await booksModel.update({_id:req.body._id},booksData);
@@ -104,8 +107,9 @@ class Books extends  BaseComponent{
      * @param
      */
     async detail(req,res,next){
-        const _id = req.params.books_id;
-        var findresult = await booksModel.findOne({_id});
+        const id = req.params.books_id;
+        console.log(id)
+        var findresult = await booksModel.findOne({id});
 
         if(findresult){
             res.send({
@@ -118,7 +122,6 @@ class Books extends  BaseComponent{
                 msg:'获取失败'
             })
         }
-
     }
 
 

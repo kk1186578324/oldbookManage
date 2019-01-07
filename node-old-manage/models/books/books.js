@@ -9,6 +9,8 @@ var BooksSchema = new mongoose.Schema({
     "classify":String,
     "image":String,
     "id":Number,
+    "pubdate":String,
+    "validity":String,
     "comment":[]
 })
 module.exports = mongoose.model('Books',BooksSchema);

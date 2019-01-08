@@ -4,7 +4,7 @@ var banner = require('./banner');
 var books = require('./books');
 var periodical = require('./periodical');//期刊
 var like = require('./like');//点赞
-var comment = require('./comment');//点赞
+var comment = require('./comment');//评论
 var v1 = require('./v1');
 
 

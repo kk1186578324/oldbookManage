@@ -123,7 +123,29 @@ class Books extends  BaseComponent{
             })
         }
     }
+    /**
+     *搜索书籍
+     * @param
+     * @param
+     */
+    async search(req,res,next){
+        let booksData = {}
+        booksData.title = new RegExp(req.body.bookName);
 
+        var findresult = await booksModel.find(booksData);
+
+        if(findresult){
+            res.send({
+                success:true,
+                content:findresult,
+            })
+        }else {
+            res.send({
+                success:false,
+                msg:'获取失败'
+            })
+        }
+    }
 
 
 }

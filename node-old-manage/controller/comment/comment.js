@@ -1,10 +1,9 @@
 
 var formidable = require("formidable")
-var BaseComponent = require ('../../prototype/baseComponent')
 var booksModel = require("../../models/books/books");
-class Like extends  BaseComponent{
+class Comment {
     constructor(){
-        super()
+
         this.add = this.add.bind(this);
     }
     /**
@@ -14,11 +13,13 @@ class Like extends  BaseComponent{
      */
     async add(req,res,next){
         var paramData = {
-            art_id:req.body.art_id,
+            id:req.body.book_id,
             userId:req.body.userId,
             content:req.body.content
         }
-        var findresult = await booksModel.findOne({id:paramData.art_id});
+        console.log(paramData)
+        var findresult = await booksModel.findOne({id:paramData.id});
+
         if(findresult){
             findresult.comment.push(paramData)
         }
@@ -32,4 +33,4 @@ class Like extends  BaseComponent{
 
 
 
-module.exports =  new Like();
+module.exports =  new Comment();

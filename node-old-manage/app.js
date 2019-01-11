@@ -3,13 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var jwt = require('jsonwebtoken');
+var fs = require('fs');
 // var connect = require('connect');
 const db = require("./models/db.js");
 var router = require('./routes/index');
 var history = require('connect-history-api-fallback');
 import chalk from 'chalk';
 // var usersRouter = require('./routes/users');
-
+// const redis = require('redis')
+// const client = redis.createClient()
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,10 +24,64 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 router(app);
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+
+
+
+    next(createError(404));
+    //
+    // var _urlArr = ["/like/add","/comment/add"]
+    // console.log("url:"+req.originalUrl);
+    // if(req.originalUrl=="/user/login"){
+    //     next()
+    // }else{
+    //     client.get('token', function(err, value){
+
+
+            // if(_urlArr.indexOf(req.originalUrl)!=-1){
+            //     var token =req.get("Authorization")
+            //
+            //     console.log(value)
+            //     console.log(token)
+            //     if(value!==token){
+            //         return res.json({status:"1001", success: false, message: 'token信息错误.' });
+            //     }
+                // var  secret  = fs.readFileSync(path.join(__dirname, 'config/pub.key'))
+                // console.log(secret)
+
+                // 确认token
+                // jwt.verify(token, 'secret', function(err, decoded) {
+                //     if (err) {
+                //         console.log(err)
+                //         return res.json({status:"1001", success: false, message: 'token信息错误.' });
+                //     } else {
+                //         // 如果没问题就把解码后的信息保存到请求中，供后面的路由使用
+                //         // req.api_user = decoded;
+                //         console.log(decoded)
+                //         next()
+                //     }
+                // });
+    //         }
+    //         // next()
+    //
+    //     })
+    //
+    //
+    // }
+
+    //
+    // if(req.cookies.token){
+    //      next()
+    // }else{
+    //     next()
+    //     console.log("url:"+req.originalUrl);
+    // }
+
+
 });
+
+
+// catch 404 and forward to error handler
 
 // error handler
 app.use(function(err, req, res, next) {

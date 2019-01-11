@@ -1,6 +1,6 @@
 
 var formidable = require("formidable")
-var booksModel = require("../../models/books/books");
+var commentModel = require("../../models/comment/comment");
 class Comment {
     constructor(){
 
@@ -18,16 +18,14 @@ class Comment {
             content:req.body.content
         }
         console.log(paramData)
-        var findresult = await booksModel.findOne({id:paramData.id});
-
-        if(findresult){
-            findresult.comment.push(paramData)
+        var result = await commentModel.create(paramData);
+        if(result){
+            res.send({
+                success:true,
+                msg:'操作成功'
+            })
         }
-        var addresult =await booksModel.update({_id:findresult._id},findresult);
-        res.send({
-            success:true,
-            msg:'操作成功'
-        })
+
     }
 }
 

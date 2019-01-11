@@ -1,11 +1,9 @@
 var mongoose = require('mongoose');
 var BooksSchema = new mongoose.Schema({
-    "date":String,
-    "name":String,
-    "address":String,
-    "password":String,
-    "classify":String,
-    "img":String,
-    "id":Number
+    "userName":String,
+    "avatar":String,
+    "city":String,
+    "token":String,
+    "openid":String
 })
-module.exports = mongoose.model('Books',BooksSchema);
+module.exports = mongoose.model('Users',BooksSchema);

@@ -7,7 +7,11 @@ const idsSchema = new mongoose.Schema({
 	img_id:Number,
     banner_id:Number,
     books_id:Number,
-    periodical_id:Number
+    periodical_id:Number,
+    like_id:Number,
+    comment_id:Number,
+    cart_id:Number,
+    address_id:Number
 
 });
 
@@ -20,7 +24,11 @@ Ids.findOne((err, data) => {
             img_id:0,
             banner_id:0,
             books_id:0,
-            periodical_id:0
+            periodical_id:0,
+            like_id:0,
+            comment_id:0,
+            cart_id:0,
+            address_id:0
 		});
 		newIds.save();
 	}

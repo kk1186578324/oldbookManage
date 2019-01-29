@@ -131,11 +131,9 @@
             console.log(this.form)
             var result;
             if (this.form._id) {
-              result = await
-              updateClassify(this.form);
+              result = await updateClassify(this.form);
             } else {
-              result = await
-              addClassify(this.form);
+              result = await addClassify(this.form);
             }
             if (result.success) {
               this.$refs["form"].resetFields()
@@ -165,7 +163,6 @@
           this.initData(this.currentPage1);
         }
         this.$message(result.msg);
-
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);

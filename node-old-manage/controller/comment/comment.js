@@ -1,9 +1,10 @@
 
 var formidable = require("formidable")
 var commentModel = require("../../models/comment/comment");
-class Comment {
+var BaseComponent = require ('../../prototype/baseComponent')
+class Comment extends BaseComponent{
     constructor(){
-
+          super();
         this.add = this.add.bind(this);
     }
     /**
@@ -12,9 +13,12 @@ class Comment {
      * @param
      */
     async add(req,res,next){
+        var UserId =req.get("Authorization");
+        const id = await this.getId('comment_id');
         var paramData = {
-            id:req.body.book_id,
-            userId:req.body.userId,
+            id,
+            bookId:req.body.book_id,
+            userId:UserId,
             content:req.body.content
         }
         console.log(paramData)
@@ -23,6 +27,20 @@ class Comment {
             res.send({
                 success:true,
                 msg:'操作成功'
+            })
+        }
+
+    }
+    async list(req,res,next){
+        var paramData = {
+            bookId:req.body.book_id,
+        }
+        console.log(paramData)
+        var result = await commentModel.find(paramData);
+        if(result){
+            res.send({
+                success:true,
+                content:result
             })
         }
 

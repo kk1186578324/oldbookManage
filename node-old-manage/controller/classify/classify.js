@@ -33,8 +33,10 @@ class Classify extends  BaseComponent{
    async list(req,res,next){
    	let page = req.body.page;
     let pageSize = req.body.pageSize;
+    let recommend = {};
+  req.body.recommend?   recommend.recommend = "是":null;
     let skip = (page-1)*pageSize;
-    var findresult = await classifyModel.find({}).skip(skip).limit(pageSize)
+    var findresult = await classifyModel.find(recommend).skip(skip).limit(pageSize)
     var count = await classifyModel.count();
         if(findresult){
 	        res.send({

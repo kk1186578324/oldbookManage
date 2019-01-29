@@ -14,7 +14,6 @@ class Periodical extends  BaseComponent{
             fav_nums:req.body.fav_nums,
             image:req.body.image,
             index:req.body.index,
-            like_status:req.body.like_status,
             pubdate:req.body.pubdate,
             title:req.body.title,
             type:req.body.type,

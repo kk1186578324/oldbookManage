@@ -7,4 +7,5 @@ router.post("/update",Books.update);
 router.post("/search",Books.search);
 router.delete("/del/:books_id",Books.delete);
 router.get("/detail/:books_id",Books.detail);
+router.post("/classify",Books.classify);
 module.exports =  router;

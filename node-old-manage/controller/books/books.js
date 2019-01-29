@@ -8,7 +8,7 @@ class Books extends  BaseComponent{
         this.add = this.add.bind(this);
     }
     async add(req,res,next){
-        const books_id = await this.getId('books_id');
+       const books_id = await this.getId('books_id');
         var booksData = {
             title:req.body.title,
             author:req.body.author,
@@ -40,8 +40,13 @@ class Books extends  BaseComponent{
         let page = req.body.page||1;
         let pageSize = req.body.pageSize||10;
         let skip = (page-1)*pageSize;
-        var findresult = await booksModel.find({}).skip(skip).limit(pageSize)
-        var count = await booksModel.count();
+        let booksData = {}
+        req.body.classify?booksData.classify = req.body.classify:null;
+        req.body.bookName? booksData.title = new RegExp(req.body.bookName):null;
+
+
+        var findresult = await booksModel.find(booksData).skip(skip).limit(pageSize)
+        var count = await booksModel.count(booksData);
         if(findresult){
             res.send({
                 success:true,
@@ -87,7 +92,6 @@ class Books extends  BaseComponent{
     async delete(req,res,next){
         const _id = req.params.books_id;
         var findresult = await booksModel.remove({_id});
-        console.log(findresult)
         if(findresult){
             res.send({
                 success:true,
@@ -108,7 +112,6 @@ class Books extends  BaseComponent{
      */
     async detail(req,res,next){
         const id = req.params.books_id;
-        console.log(id)
         var findresult = await booksModel.findOne({id});
 
         if(findresult){
@@ -135,6 +138,23 @@ class Books extends  BaseComponent{
 
         var findresult = await booksModel.find(booksData);
 
+        if(findresult){
+            res.send({
+                success:true,
+                content:findresult,
+            })
+        }else {
+            res.send({
+                success:false,
+                msg:'获取失败'
+            })
+        }
+    }
+//分类搜索
+    async classify(req,res,next){
+        let booksData = {}
+        booksData.classify = req.body.classify;
+        var findresult = await booksModel.find(booksData);
         if(findresult){
             res.send({
                 success:true,

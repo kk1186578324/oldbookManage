@@ -1,1 +1,1 @@
-# oldbookManage
+# 运用node和express搭建的后台管理系统，作为配套的微信小程序书店的服务端
